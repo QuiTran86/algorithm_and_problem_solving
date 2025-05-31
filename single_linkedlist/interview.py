@@ -105,10 +105,3 @@ class LinkedList:
             fast = fast.next
             slow = slow.next
         return slow
-
-
-ll = LinkedList(1)
-items = [2, 3, 4]
-ll.from_values(items)
-ll.from_values([])
-ll.print_list()
