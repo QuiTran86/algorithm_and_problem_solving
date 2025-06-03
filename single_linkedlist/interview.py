@@ -35,6 +35,18 @@ class LinkedList:
             print(temp)
             temp = temp.next
 
+    @property
+    def values(self):
+        if not self.head:
+            return []
+
+        temp = self.head
+        results = []
+        while temp:
+            results.append(temp.value)
+            temp = temp.next
+        return results
+
     def from_values(self, values):
         if not values:
             return
@@ -105,3 +117,41 @@ class LinkedList:
             fast = fast.next
             slow = slow.next
         return slow
+
+    def remove_duplicates_with_set(self):
+        """
+        The time complexity: O(n), space complexity: O(n)
+        :return:
+        """
+        if not self.head:
+            return
+
+        seen_nodes = []
+        prev, current = self.head, self.head
+        while current:
+            if current.value in seen_nodes:
+                prev.next = current.next
+                prev = prev.next
+                self.length -= 1
+            else:
+                seen_nodes.append(current.value)
+            current = current.next
+
+    def remove_duplicates_in_place(self):
+        """
+        The time complexity: O(n^2). Space complexity: O(1)
+        :return:
+        """
+        if not self.head:
+            return
+
+        current, runner = self.head, self.head
+        while current:
+            while runner.next:
+                if current.value == runner.next.value:
+                    runner.next = runner.next.next
+                    self.length -= 1
+                else:
+                    runner = runner.next
+            current = current.next
+            runner = current

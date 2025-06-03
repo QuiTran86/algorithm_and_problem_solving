@@ -45,3 +45,33 @@ def test_find_kth_node_from_end(values, k, exepected_output):
             assert result == exepected_output
         if result:
             assert result.value == exepected_output.value
+
+
+@pytest.mark.parametrize('values, expected_length, expected_values', [
+    ([1, 2, 3, 2, 3, 4, 5], 5, [1, 2, 3, 4, 5]),
+    ([1, 3, 3, 2], 3, [1, 2, 3]),
+    ([1], 1, [1])
+])
+def test_remove_duplicates_with_set(values, expected_length, expected_values):
+    if values:
+        ll = LinkedList(values[0])
+        ll.from_values(values)
+        ll.remove_duplicates_with_set()
+        assert ll.length == expected_length
+        for value in ll.values:
+            assert value in expected_values
+
+
+@pytest.mark.parametrize('values, expected_length, expected_values', [
+    ([1, 2, 3, 2, 3, 4, 5], 5, [1, 2, 3, 4, 5]),
+    ([1, 3, 3, 2], 3, [1, 2, 3]),
+    ([1], 1, [1])
+])
+def test_remove_duplicates_in_place(values, expected_length, expected_values):
+    if values:
+        ll = LinkedList(values[0])
+        ll.from_values(values)
+        ll.remove_duplicates_in_place()
+        assert ll.length == expected_length
+        for value in ll.values:
+            assert value in expected_values
