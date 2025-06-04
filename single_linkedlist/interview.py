@@ -155,3 +155,76 @@ class LinkedList:
                     runner = runner.next
             current = current.next
             runner = current
+
+    def binary_to_decimal(self):
+        """
+        The time complexity: O(n), Space complexity: O(1)
+        :return:
+        """
+        if not self.head:
+            return
+
+        current = self.head
+        result = 0
+        while current:
+            result = result * 2 + current.value
+            current = current.next
+        return result
+
+    def partition_list(self, value):
+        """
+        The time complexity: O(n), Space complexity: O(1)
+        :param value:
+        :return:
+        """
+        if not self.head:
+            return
+
+        dummy1 = Node(0)
+        dummy2 = Node(0)
+        cur1 = dummy1
+        cur2 = dummy2
+        current = self.head
+        while current:
+            if current.value < value:
+                cur1.next = current
+                cur1 = current
+            else:
+                cur2.next = current
+                cur2 = current
+            current = current.next
+        cur1.next = dummy2.next
+        cur2.next = None
+        self.head = dummy1.next
+
+    def reverse_between(self, start, end):
+        """
+        The time complexity: O(N). Space complexity: O(1)
+        :param start:
+        :param end:
+        :return:
+        """
+        if start < 0 or end > self.length:
+            return
+
+        if not self.head:
+            return
+
+        dummy = Node(0)
+        dummy.next = self.head
+        prev = dummy
+        for i in range(start):
+            prev = prev.next
+
+        current = prev.next
+        for i in range(end - start):
+            node_to_move = current.next
+            current.next = node_to_move.next
+            node_to_move.next = prev.next
+            prev.next = node_to_move
+
+        self.head = dummy.next
+
+    def swap_pair(self):
+        pass
+

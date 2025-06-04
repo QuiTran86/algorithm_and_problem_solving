@@ -75,3 +75,39 @@ def test_remove_duplicates_in_place(values, expected_length, expected_values):
         assert ll.length == expected_length
         for value in ll.values:
             assert value in expected_values
+
+
+@pytest.mark.parametrize('values, expected_output', [
+    ([1, 0, 1], 5),
+    ([1, 0, 0, 1], 9),
+    ([1, 0, 1, 1, 0, 1], 45)
+])
+def test_binary_to_decimal(values, expected_output):
+    if values:
+        ll = LinkedList(values[0])
+        ll.from_values(values[1:])
+        assert ll.binary_to_decimal() == expected_output
+
+
+@pytest.mark.parametrize('values, target, expected_output', [
+    ([1, 2, 8, 3, 5, 10], 5, [1, 2, 3, 8, 5, 10]),
+    ([9, 1, 3, 6, 7, 12, 11, 8, 4], 6, [1, 3, 4, 9, 6, 7, 12, 11, 8])
+])
+def test_partition_list(values, target, expected_output):
+    if values:
+        ll = LinkedList(values[0])
+        ll.from_values(values[1:])
+        ll.partition_list(target)
+        assert ll.values == expected_output
+
+
+@pytest.mark.parametrize('values, start, end, expected_output', [
+    ([1, 2, 3, 4, 5, 6], 2, 4, [1, 2, 5, 4, 3, 6]),
+    ([1, 2, 3, 4], 0, 2, [3, 2, 1, 4])
+])
+def test_reverse_between(values, start, end, expected_output):
+    if values:
+        ll = LinkedList(values[0])
+        ll.from_values(values[1:])
+        ll.reverse_between(start, end)
+        assert ll.values == expected_output
