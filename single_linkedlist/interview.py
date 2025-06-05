@@ -226,5 +226,32 @@ class LinkedList:
         self.head = dummy.next
 
     def swap_pair(self):
-        pass
+        """
+        The time complexity: O(n), Space complexity: O(1)
+        :return:
+        """
+        if not self.head:
+            return
 
+        dummy = Node(0)
+        prev = dummy
+        first = self.head
+        if not first.next:
+            dummy.next = first
+
+        while first.next:
+            second = first.next
+            first.next = second.next
+            second.next = first
+            prev.next = second
+            prev = first
+            first = first.next
+            if not first:
+                break
+        self.head = dummy.next
+
+
+ll = LinkedList(1)
+print(ll.values)
+ll.swap_pair()
+print(ll.values)

@@ -111,3 +111,19 @@ def test_reverse_between(values, start, end, expected_output):
         ll.from_values(values[1:])
         ll.reverse_between(start, end)
         assert ll.values == expected_output
+
+
+@pytest.mark.parametrize('values, expected_output', [
+    ([1, 2, 3, 4, 5, 6], [2, 1, 4, 3, 6, 5]),
+    ([1, 2, 3, 4], [2, 1, 4, 3]),
+    ([], None),
+    ([1], [1]),
+    ([1, 2], [2, 1]),
+    ([1, 2, 3], [2, 1, 3])
+])
+def test_swap_pair(values, expected_output):
+    if values:
+        ll = LinkedList(values[0])
+        ll.from_values(values[1:])
+        ll.swap_pair()
+        assert ll.values == expected_output
