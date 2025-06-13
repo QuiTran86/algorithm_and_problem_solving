@@ -71,3 +71,33 @@ def sort_stack(original_stack):
             original_stack.push(s.pop())
 
     return original_stack
+
+
+class Queues:
+
+    def __init__(self):
+        self.stack1 = []
+        self.stack2 = []
+
+    def is_empty(self):
+        return len(self.stack1) == 0
+
+    def peek(self):
+        return self.stack1[-1]
+
+    def enqueue(self, value):
+        if self.is_empty():
+            self.stack1.append(value)
+        else:
+            for i in range(len(self.stack1)):
+                self.stack2.append(self.stack1.pop())
+            self.stack1.append(value)
+
+        for i in range(len(self.stack2)):
+            self.stack1.append(self.stack2.pop())
+
+    def dequeue(self):
+        if self.is_empty():
+            return
+
+        return self.stack1.pop()
